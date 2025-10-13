@@ -1,0 +1,66 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Kotak Jam (Lingkaran) */
+.jam-analog {
+    width: 300px;
+    height: 300px;
+    border: 15px solid #333;
+    border-radius: 50%;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Titik Tengah */
+.tengah {
+    width: 14px;
+    height: 14px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* Base untuk semua Jarum */
+.jarum {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center; 
+    transform: rotate(0deg); 
+}
+
+/* Styling Jarum Detik */
+.detik {
+    width: 2px;
+    height: 150px; /* 🚨 Panjang Baru: 150 pixel */
+    background-color: red;
+    z-index: 7;
+}
+
+/* Styling Jarum Menit */
+.menit {
+    width: 4px;
+    height: 120px; /* 🚨 Panjang Baru: 120 pixel */
+    background-color: #555;
+    z-index: 8;
+}
+
+/* Styling Jarum Jam */
+.jam {
+    width: 6px;
+    height: 100px; /* 🚨 Panjang Baru: 100 pixel */
+    background-color: #000;
+    z-index: 9;
+}
