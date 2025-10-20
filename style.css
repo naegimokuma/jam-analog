@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: transparent; 
+}
+
+.jam-analog {
+    width: 300px; 
+    height: 300px;
+    position: relative;
+}
+
+.jarum {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center; 
+    transform: rotate(0deg); 
+}
+
+/* Styling Jarum Detik (Tetap sama) */
+.detik {
+    width: 10px; 
+    height: 200px; 
+    background-image: url('E:\jarum jam/jarum-detik.png'); 
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 7;
+}
+
+/* Styling Jarum Menit (Tetap sama) */
+.menit {
+    width: 18px;
+    height: 180px; 
+    background-image: url('E:\jarum jam/jarum-menit.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 8;
+}
+
+/* Styling Jarum Jam (Tetap sama) */
+.jam {
+    width: 18px;
+    height: 100px; 
+    background-image: url('E:\jarum jam/jarum-jam.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 9;
+}
+
+
+/* ---------------------------------------------------- */
+/* 🚨 MODIFIKASI LINGKARAN TENGAH MENGGUNAKAN GAMBAR */
+/* ---------------------------------------------------- */
+
+.tengah {
+    /* Sesuaikan width dan height dengan dimensi gambar tengah-jam.png Anda */
+    width: 30px; /* Contoh: Lebar gambar tengah Anda */
+    height: 30px; /* Contoh: Tinggi gambar tengah Anda */
+    
+    background-image: url('images/tengah-jam.png'); /* 🚨 PATH FILE GAMBAR TENGAH */
+    background-size: cover; /* atau 100% 100% untuk mengisi seluruh div */
+    background-repeat: no-repeat;
+    background-position: center; /* Pastikan gambar berada di tengah */
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Pastikan di atas semua jarum */
+    
+    /* Hapus border-radius jika gambar Anda sudah berbentuk lingkaran */
+    border-radius: 50%; /* Bisa dipertahankan jika ingin memastikan bentuk lingkaran */
+    /* Hapus box-shadow jika gambar sudah memiliki efek visual yang diinginkan */
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */ 
+    
+    /* Hapus pseudo-element ::after yang tidak lagi dibutuhkan */
+}
