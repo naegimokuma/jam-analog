@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: transparent; 
+}
+
+.jam-analog {
+    width: 300px; 
+    height: 300px;
+    position: relative;
+    /* Opsional: Tampilan belakang jam */
+    /* background: url('images/dial.png') no-repeat center center / cover; */
+    /* border-radius: 50%; */
+}
+
+.jarum {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    
+    /* 🚨 MODIFIKASI: Geser titik putar 20px ke atas */
+    /* 100% adalah bagian bawah jarum. Menguranginya 20px menggeser titik putar ke atas. */
+    transform-origin: center calc(100% - 20px); 
+    
+    transform: rotate(0deg); 
+}
+
+/* Styling Jarum Detik (Tinggi dikurangi 20px) */
+.detik {
+    width: 10px; 
+    height: 180px; /* Diubah dari 200px (200 - 20) */
+    background-image: url('jarum-detik.png'); 
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 7;
+}
+
+/* Styling Jarum Menit (Tinggi dikurangi 20px) */
+.menit {
+    width: 18px;
+    height: 160px; /* Diubah dari 180px (180 - 20) */
+    background-image: url('jarum-menit.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 8;
+}
+
+/* Styling Jarum Jam (Tinggi dikurangi 20px) */
+.jam {
+    width: 18px;
+    height: 100px; /* Diubah dari 120px (120 - 20) */
+    background-image: url('jarum-jam.png'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 9;
+}
+
+
+/* Styling Lingkaran Tengah */
+.tengah {
+    width: 30px; 
+    height: 30px; 
+    
+    /* Pastikan path gambar Anda benar */
+    background-image: url('images/tengah-jam.png'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; 
+    
+    border-radius: 50%;
+}
