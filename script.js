@@ -16,7 +16,7 @@ function setWaktuUTC7() {
     let now = new Date();
     
     // --- PENGURANGAN 8 MENIT ---
-    now.setMinutes(now.getMinutes() - 8); 
+    now.setMinutes(now.getMinutes() - 11); 
 
     const parts = formatter.formatToParts(now);
     
@@ -39,3 +39,4 @@ function setWaktuUTC7() {
 // Jalankan setiap detik
 setInterval(setWaktuUTC7, 1000);
 setWaktuUTC7();
+
