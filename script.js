@@ -2,51 +2,68 @@ const jarumDetik = document.querySelector('.detik');
 const jarumMenit = document.querySelector('.menit');
 const jarumJam = document.querySelector('.jam');
 
-let offsetWaktu = 0; 
+let waktuSekarang = null; 
 
+/**
+ * 1. Mengambil waktu real-time dari Server Jakarta
+ */
 async function sinkronkanWaktu() {
     try {
-        // Mengambil waktu real-time Jakarta dari TimeAPI.io
         const response = await fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Jakarta');
         const data = await response.json();
         
-        const waktuServer = new Date(data.dateTime);
-        const waktuLokal = new Date();
+        // Update waktu di memori dengan data terbaru dari server
+        waktuSekarang = new Date(data.dateTime);
         
-        // Hitung selisih antara server dan device user
-        offsetWaktu = waktuServer.getTime() - waktuLokal.getTime();
-        
-        console.log("Sinkronisasi Berhasil: Mengikuti waktu server Jakarta");
+        console.log("Sinkronisasi Berhasil: Waktu server diperbarui.");
     } catch (err) {
-        console.error("Gagal sinkronisasi, menggunakan waktu lokal (fallback).");
-        // Jika gagal, offset tetap 0 atau gunakan logika UTC+7
+        console.error("Gagal sinkronisasi dengan server.");
     }
 }
 
-function updateJam() {
-    // Waktu sekarang dikoreksi dengan offset server
-    let now = new Date(Date.now() + offsetWaktu);
-    
-    const detik = now.getSeconds();
-    const menit = now.getMinutes();
-    const jam = now.getHours();
+/**
+ * 2. Logika pergerakan jarum (berjalan secara mandiri)
+ */
+function jalankanWaktu() {
+    if (!waktuSekarang) return;
 
-    // Kalkulasi derajat rotasi agar pergerakan jarum halus
+    // Tambahkan 1 detik ke objek waktu di memori
+    waktuSekarang.setSeconds(waktuSekarang.getSeconds() + 1);
+
+    const detik = waktuSekarang.getSeconds();
+    const menit = waktuSekarang.getMinutes();
+    const jam = waktuSekarang.getHours();
+
+    // Kalkulasi rotasi
     const derajatDetik = (detik / 60) * 360; 
     const derajatMenit = ((menit / 60) * 360) + ((detik / 60) * 6);
     const derajatJam = (((jam % 12) / 12) * 360) + ((menit / 60) * 30);
 
-    // Terapkan ke elemen HTML
+    // Update tampilan visual
     jarumDetik.style.transform = `translateX(-50%) rotate(${derajatDetik}deg)`;
     jarumMenit.style.transform = `translateX(-50%) rotate(${derajatMenit}deg)`;
     jarumJam.style.transform = `translateX(-50%) rotate(${derajatJam}deg)`;
 }
 
-// Jalankan sinkronisasi saat pertama kali load
-sinkronkanWaktu().then(() => {
-    setInterval(updateJam, 1000);
-    updateJam();
+/**
+ * 3. Event Listener untuk Deteksi Tab Aktif
+ * Jika user kembali ke tab ini, jam akan langsung ambil waktu terbaru dari server
+ */
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === 'visible') {
+        console.log("Tab aktif kembali, menyelaraskan waktu...");
+        sinkronkanWaktu();
+    }
 });
 
-// Update selisih waktu setiap 30 menit agar tetap akurat
+/**
+ * 4. Inisialisasi awal
+ */
+sinkronkanWaktu().then(() => {
+    // Jalankan pergerakan jarum setiap 1 detik
+    setInterval(jalankanWaktu, 1000);
+    jalankanWaktu();
+});
+
+// Re-sinkronisasi otomatis setiap 30 menit sebagai pengaman tambahan
 setInterval(sinkronkanWaktu, 1800000);
