@@ -1,4 +1,4 @@
-const jarumDetik = document.querySelector('.detik')
+const jarumDetik = document.querySelector('.detik');
 const jarumMenit = document.querySelector('.menit');
 const jarumJam = document.querySelector('.jam');
 const elemenTengah = document.querySelector('.tengah'); // Tambahkan ini
@@ -49,4 +49,5 @@ function jalankanWaktu() {
 }
 
 // ... sisanya sama seperti kode Anda ...
+
 
