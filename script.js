@@ -12,27 +12,38 @@ async function sinkronkanWaktu() {
         const response = await fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Jakarta');
         const data = await response.json();
         
-        // Update waktu di memori dengan data terbaru dari server
         waktuSekarang = new Date(data.dateTime);
-        
         console.log("Sinkronisasi Berhasil: Waktu server diperbarui.");
     } catch (err) {
         console.error("Gagal sinkronisasi dengan server.");
+        // Fallback ke waktu lokal jika server gagal
+        waktuSekarang = new Date();
     }
 }
 
 /**
- * 2. Logika pergerakan jarum (berjalan secara mandiri)
+ * 2. Logika pergerakan jarum & Perubahan Gambar
  */
 function jalankanWaktu() {
     if (!waktuSekarang) return;
 
-    // Tambahkan 1 detik ke objek waktu di memori
     waktuSekarang.setSeconds(waktuSekarang.getSeconds() + 1);
 
     const detik = waktuSekarang.getSeconds();
     const menit = waktuSekarang.getMinutes();
     const jam = waktuSekarang.getHours();
+
+    // --- LOGIKA DURASI 18:00 - 06:00 ---
+    // Jika jam >= 18 (sore) ATAU jam < 6 (pagi)
+    if (jam >= 18 || jam < 6) {
+        jarumJam.classList.add('mode-malam');
+        jarumMenit.classList.add('mode-malam');
+        jarumDetik.classList.add('mode-malam');
+    } else {
+        jarumJam.classList.remove('mode-malam');
+        jarumMenit.classList.remove('mode-malam');
+        jarumDetik.classList.remove('mode-malam');
+    }
 
     // Kalkulasi rotasi
     const derajatDetik = (detik / 60) * 360; 
@@ -40,30 +51,28 @@ function jalankanWaktu() {
     const derajatJam = (((jam % 12) / 12) * 360) + ((menit / 60) * 30);
 
     // Update tampilan visual
+    // Note: Tetap gunakan translateX(-50%) agar jarum tetap center secara horizontal
     jarumDetik.style.transform = `translateX(-50%) rotate(${derajatDetik}deg)`;
     jarumMenit.style.transform = `translateX(-50%) rotate(${derajatMenit}deg)`;
     jarumJam.style.transform = `translateX(-50%) rotate(${derajatJam}deg)`;
 }
 
 /**
- * 3. Event Listener untuk Deteksi Tab Aktif
- * Jika user kembali ke tab ini, jam akan langsung ambil waktu terbaru dari server
+ * 3. Deteksi Tab Aktif
  */
 document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === 'visible') {
-        console.log("Tab aktif kembali, menyelaraskan waktu...");
         sinkronkanWaktu();
     }
 });
 
 /**
- * 4. Inisialisasi awal
+ * 4. Inisialisasi
  */
 sinkronkanWaktu().then(() => {
-    // Jalankan pergerakan jarum setiap 1 detik
     setInterval(jalankanWaktu, 1000);
     jalankanWaktu();
 });
 
-// Re-sinkronisasi otomatis setiap 30 menit sebagai pengaman tambahan
+// Re-sinkronisasi otomatis setiap 30 menit
 setInterval(sinkronkanWaktu, 1800000);
