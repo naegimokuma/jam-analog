@@ -11,7 +11,7 @@ body {
     width: 320px; 
     height: 320px;
     position: relative;
-    background-image: url('jam-mekah-malam.png'); 
+    background-image: url('jam-mekah-mala.png'); 
     background-size: 100% 100%; 
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -106,4 +106,5 @@ body {
 .tengah.mode-malam {
     background-image: url('tengah-jam-malam.png') !important;
 }
+
 
