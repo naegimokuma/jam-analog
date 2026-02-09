@@ -100,4 +100,27 @@ body {
     
     border-radius: 50%;
 
+/* Tambahkan ini di bagian bawah file CSS Anda */
+.jarum.mode-malam {
+    /* Tambahkan efek transisi halus saat berganti gambar */
+    transition: background-image 0.5s ease-in-out;
 }
+
+.jam.mode-malam {
+    background-image: url('jarum-jam-malam.png') !important;
+}
+
+.menit.mode-malam {
+    background-image: url('jarum-menit-malam.png') !important;
+}
+
+.detik.mode-malam {
+    background-image: url('jarum-detik-malam.png') !important;
+}
+
+.tengah.mode-malam {
+    background-image: url('tengah-jam-malam.png') !important;
+} 
+    
+}
+
