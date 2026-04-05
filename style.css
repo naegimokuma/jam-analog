@@ -18,56 +18,35 @@ body {
     z-index: 6;
 }
 
-.jarum {
+.detik, .menit, .jam {
     position: absolute;
     bottom: 50%;
     left: 50%;
-    transform-origin: bottom center; 
-    transform: translateX(-50%) rotate(0deg); /* Ditambah translateX agar center */
+    transform-origin: bottom center;
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center bottom;
 }
-
-/* --- Versi Siang (Default) --- */
 
 .detik {
     width: 5px; 
     height: 140px; 
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
     background-image: url('jarum-detik.png'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat;
-    background-position: center bottom;
     z-index: 10;
-    transform-origin: bottom center;
 }
 
 .menit {
     width: 16px;
     height: 120px; 
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
     background-image: url('jarum-menit.png'); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center bottom;
     z-index: 8;
-    transform-origin: bottom center;
 }
 
 .jam {
     width: 16px;
     height: 80px; 
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
     background-image: url('jarum-jam.png'); 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center bottom;
     z-index: 9;
-    transform-origin: bottom center;
 }
 
 .tengah {
@@ -83,9 +62,7 @@ body {
     transform: translate(-50%, -50%);
     z-index: 11; 
     border-radius: 50%;
-} /* <-- SEBELUMNYA KURANG KURUNG TUTUP DI SINI */
-
-/* --- Mode Malam (Pukul 18.00 - 06.00) --- */
+}
 
 .mode-malam {
     transition: background-image 0.5s ease-in-out;
@@ -106,5 +83,3 @@ body {
 .tengah.mode-malam {
     background-image: url('tengah-jam-malam.png') !important;
 }
-
-
