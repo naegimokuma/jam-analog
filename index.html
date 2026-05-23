@@ -22,19 +22,19 @@
         width: 100vw;
         height: 100vh;
         background-color: transparent;
-        z-index: 9999; /* Berada jauh di atas z-index jarum jam (11) */
+        z-index: 9999;
         display: flex;
         justify-content: center;
         align-items: center;
-        pointer-events: none; /* Klik mouse tetap bisa menembus ke layar di bawahnya */
+        pointer-events: none;
     ">
         <img src="Persib.jpeg" alt="Persib Juara" style="
             width: 320px;
             height: 320px;
-            object-fit: cover; /* Melakukan kliping/crop otomatis pada resolusi tinggi */
-            object-position: center; /* Memastikan bagian tengah gambar tidak terpotong */
-            border-radius: 50%; /* Membuat gambar berbentuk bulat pas dengan ukuran jam */
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3); /* Efek bayangan supya terlihat estetik menimpa jam */
+            object-fit: cover; /* Melakukan crop otomatis */
+            object-position: center; /* Memastikan bagian tengah tidak terpotong */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            /* BORDER-RADIUS: 50% TELAH DIHAPUS - Gambar sekarang persegi */
         ">
     </div>
     <!-- ====================================================== -->
