@@ -14,6 +14,31 @@
         <div class="tengah"></div>
     </div>
 
+    <!-- === POTONG DARI SINI UNTUK MENGHAPUS GAMBAR PERSIB === -->
+    <div id="overlay-persib" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        z-index: 9999; /* Berada jauh di atas z-index jarum jam (11) */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none; /* Klik mouse tetap bisa menembus ke layar di bawahnya */
+    ">
+        <img src="Persib.jpeg" alt="Persib Juara" style="
+            width: 320px;
+            height: 320px;
+            object-fit: cover; /* Melakukan kliping/crop otomatis pada resolusi tinggi */
+            object-position: center; /* Memastikan bagian tengah gambar tidak terpotong */
+            border-radius: 50%; /* Membuat gambar berbentuk bulat pas dengan ukuran jam */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3); /* Efek bayangan supya terlihat estetik menimpa jam */
+        ">
+    </div>
+    <!-- ====================================================== -->
+
     <script src="script.js"></script> 
 </body>
 </html>
